@@ -1,13 +1,23 @@
 function curve_handle=plot_FRF_Nyq(H_vec, ...
-                         H_subtitle,DispMagLines,varargin)  %Optional arguments
+                         H_label,DispMagLines,varargin)  %Optional arguments
 
+H_real_multiplier='';
 if nargin<2
-    H_subtitle='H';
+    H_Latex_subtitle='H';
 else
-    if isempty(H_subtitle)
-        H_subtitle='H';
+    if isempty(H_label)
+        H_Latex_subtitle='H';
+    elseif iscellstr(H_label)
+        if length(H_label)~=2
+            error('If H_label is cell string, it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
+        end
+        H_Latex_subtitle=H_label{1};
+        H_real_multiplier=H_label{2};
+    else
+        H_Latex_subtitle=H_label;
     end
 end
+H_Latex_subtitle=[H_Latex_subtitle,'\left(f \right)'];
 
 curve_handle=plot(real(H_vec),imag(H_vec),varargin{:});
 if nargin>2
@@ -40,6 +50,6 @@ DataAspectRatio=get(gca,'DataAspectRatio');
 set(gca,'DataAspectRatio',[DataAspectRatio(1),DataAspectRatio(1),DataAspectRatio(3)]);
 axis(vax);
 
-xlabel(['$\Re\left(',H_subtitle,'\right)$'], 'interpreter', 'latex')
-ylabel(['$\Im\left(',H_subtitle,'\right)$'], 'interpreter', 'latex')
+xlabel(['$\Re\left(',H_Latex_subtitle,'\right)',H_real_multiplier,'$'], 'interpreter', 'latex')
+ylabel(['$\Im\left(',H_Latex_subtitle,'\right)',H_real_multiplier,'$'], 'interpreter', 'latex')
 grid on

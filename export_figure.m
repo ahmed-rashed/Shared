@@ -32,7 +32,7 @@ for n=1:length(pictureFormat)
     end
 end
 
-if min(size(fig_handle_vec,1),size(fig_handle_vec,2))~=1,
+if min(size(fig_handle_vec,1),size(fig_handle_vec,2))~=1
     error('h must be 1 D vector'),
 end
 
@@ -88,7 +88,7 @@ for i=1:length(fig_handle_vec)
     end
 end
 
-for i=1:length(fig_handle_vec),
+for i=1:length(fig_handle_vec)
     for n=1:length(printFlag)
         if nargin<3
            print(['-r',int2str(resolution)], '-painters', ['-d',printFlag{n}],['-f',int2str(double(fig_handle_vec(i)))]);
@@ -100,13 +100,13 @@ for i=1:length(fig_handle_vec),
     end
 end
 
-% %If "strawberry perl" and Miketex is installed
+%If "strawberry perl" and Miketex is installed
 if nargin>=3 %&& ispc
     temp_env=getenv('LD_LIBRARY_PATH');
     setenv('LD_LIBRARY_PATH', '')
     for n=1:length(pictureFormat)
         if strcmpi(pictureFormat{n},'pdf')
-           for i=1:length(fig_handle_vec),
+           for i=1:length(fig_handle_vec)
                system(['pdfcrop "',filenames{i},'.pdf" "',filenames{i},'.pdf"']);
            end
 
