@@ -104,8 +104,11 @@ if length(islin)>1
     end
 end
 
-if ~isgraphics(ax_phase_h),xlabel(ax_mag_h,f_label, 'interpreter', 'latex');end
-if isgraphics(ax_phase_h),set(ax_mag_h,'XTickLabel',[]);end
+if isgraphics(ax_phase_h)
+	set(ax_mag_h,'XTickLabel',[]);
+else
+	xlabel(ax_mag_h,f_label, 'interpreter', 'latex')
+end
 
 % if iscell(H_Latex_subtitle)
 %     legStr=cell(size(H_Latex_subtitle));
@@ -167,19 +170,17 @@ if isgraphics(ax_phase_h)
     yTicks=[yLim_min:yStep:yLim_max];
     N_ticks=length(yTicks);
     set(ax_phase_h,'YTick',yTicks);
-    n=1;
     yTickLabels=cell(1,N_ticks);
     for ii=1:N_ticks
         if yTicks(ii)==0
-            yTickLabels{n}='0';
-        elseif yTicks(ii)==1
-            yTickLabels{n}='\pi';
-        elseif yTicks(ii)==-1
-            yTickLabels{n}='-\pi';
+            yTickLabels{ii}='0';
+        elseif yTicks(ii)==pi
+            yTickLabels{ii}='\pi';
+        elseif yTicks(ii)==-pi
+            yTickLabels{ii}='-\pi';
         else
-            yTickLabels{n}=[num2str(yTicks(ii)/pi),'\pi'];
+            yTickLabels{ii}=[num2str(yTicks(ii)/pi),'\pi'];
         end
-        n=n+1;
     end
     ax_phase_h.YAxis.FontName='Times';
     set(ax_phase_h,'YTickLabel',yTickLabels);
