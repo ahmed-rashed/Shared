@@ -149,7 +149,7 @@ if isgraphics(ax_phase_h)
 %         end
 %         legend(ax_phase_h,legStr, 'interpreter', 'latex')
 %     else
-        ylabel(ax_phase_h,['$\angle \left(',H_Latex_subtitle,'\right)$'], 'interpreter', 'latex')
+        ylabel(ax_phase_h,['$\angle \left(',H_Latex_subtitle,'\right)$ (rad)'], 'interpreter', 'latex')
 %     end
 
     yStep=pi;
