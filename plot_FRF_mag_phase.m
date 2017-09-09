@@ -167,7 +167,7 @@ if isgraphics(ax_phase_h)
     if N_ticks>6
         yStep=yStep*round(N_ticks/6);
     end
-    yTicks=[yLim_min:yStep:yLim_max];
+    yTicks=fliplr(yLim_max:-yStep:yLim_min);
     N_ticks=length(yTicks);
     set(ax_phase_h,'YTick',yTicks);
     yTickLabels=cell(1,N_ticks);
