@@ -15,6 +15,8 @@ else
 end
 indices=strfind(f_label,'$');
 if length(indices)<2,error('f_label does not include LaTeX inline equation !!'),end
+index_temp=strfind(f_label,'\equiv');
+if ~isempty(index_temp),indices(2)=index_temp;end
 
 H_real_multiplier='';
 if nargin<6

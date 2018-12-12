@@ -39,6 +39,8 @@ else
 end
 indices=strfind(f_label,'$');
 if length(indices)<2,error('f_label does not include LaTeX inline equation !!'),end
+index_temp=strfind(f_label,'\equiv');
+if ~isempty(index_temp),indices(2)=index_temp;end
 
 H_real_multiplier='';
 if nargin<7
@@ -175,11 +177,11 @@ if isgraphics(ax_phase_h)
         if yTicks(ii)==0
             yTickLabels{ii}='0';
         elseif yTicks(ii)==pi
-            yTickLabels{ii}='\pi';
+            yTickLabels{ii}='\pi';   %'{\it \pi}'
         elseif yTicks(ii)==-pi
-            yTickLabels{ii}='-\pi';
+            yTickLabels{ii}='-\pi';   %'-{\it \pi}'
         else
-            yTickLabels{ii}=[num2str(yTicks(ii)/pi),'\pi'];
+            yTickLabels{ii}=[num2str(yTicks(ii)/pi),'\pi'];   %{\it \pi}
         end
     end
     ax_phase_h.YAxis.FontName='Times';

@@ -1,8 +1,20 @@
 function curve_handle=plot_FRF_Nyq(H_vec, ...
-                         H_label,DispMagLines,varargin)  %Optional arguments
+                         f_label,H_label,DispMagLines,varargin)  %Optional arguments
+
+if nargin<2
+    f_label='$f$ (Hz)';
+else
+    if isempty(f_label)
+        f_label='$f$ (Hz)';
+    end
+end
+indices=strfind(f_label,'$');
+if length(indices)<2,error('f_label does not include LaTeX inline equation !!'),end
+index_temp=strfind(f_label,'\equiv');
+if ~isempty(index_temp),indices(2)=index_temp;end
 
 H_real_multiplier='';
-if nargin<2
+if nargin<3
     H_Latex_subtitle='H';
 else
     if isempty(H_label)
@@ -17,10 +29,10 @@ else
         H_Latex_subtitle=H_label;
     end
 end
-H_Latex_subtitle=[H_Latex_subtitle,'\left(f \right)'];
+H_Latex_subtitle=[H_Latex_subtitle,'\left(',f_label(indices(1)+1:indices(2)-1),'\right)'];
 
 curve_handle=plot(real(H_vec),imag(H_vec),varargin{:});
-if nargin>2
+if nargin>3
     if DispMagLines
         n_f=length(H_vec);
         n_MagLines=DispMagLines;
