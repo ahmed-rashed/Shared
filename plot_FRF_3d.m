@@ -43,8 +43,8 @@ ylabel(['$\Re\left(',H_Latex_subtitle,'\right)',H_real_multiplier,'$'], 'interpr
 zlabel(['$\Im\left(',H_Latex_subtitle,'\right)',H_real_multiplier,'$'], 'interpreter', 'latex')
 
 if nargin>4
-    nexta = get(gca,'NextPlot');
-    nextf = get(gcf,'NextPlot');
+    nexta=get(gca,'NextPlot');
+    nextf=get(gcf,'NextPlot');
 
     if DispRealImag
         set(gca,'YLimMode','manual');
