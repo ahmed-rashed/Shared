@@ -1,4 +1,4 @@
-function export_figure(fig_handle_vec,  ...
+function export_figure(fig_handle_vec, ...
                     Expand,filenames,resolution,pictureFormat_cVec,dimScale)   %Optional arguments
 
 if nargin<2
@@ -66,16 +66,16 @@ for i=1:length(fig_handle_vec)
     if ~isempty(Expand)
         if ischar(Expand)
             if strcmpi(Expand(1:2),'||')
-                 set(fig_handle_vec(i), 'PaperOrientation', 'portrait');
+                 set(fig_handle_vec(i),'PaperOrientation','portrait');
             elseif strcmpi(Expand(1:2),'==')
-               set(fig_handle_vec(i), 'PaperOrientation', 'landscape');
+               set(fig_handle_vec(i),'PaperOrientation','landscape');
             end
         end
         
         if ischar(Expand)
             if strcmpi(Expand,'||') || strcmpi(Expand,'==')
                 a=get(fig_handle_vec(i),'papersize');
-                set(fig_handle_vec(i), 'PaperPositionMode', 'manual');
+                set(fig_handle_vec(i),'PaperPositionMode','manual');
                 set(fig_handle_vec(i),'PaperPosition',[0 0 a(1) a(2)]);
                 set(fig_handle_vec(i),'Units',get(fig_handle_vec(i),'PaperUnits'));
                 set(fig_handle_vec(i),'Position',[0 0 a(1) a(2)]);
@@ -83,12 +83,12 @@ for i=1:length(fig_handle_vec)
                 set(0,'CurrentFigure',fig_handle_vec(i)),
                 drawnow
             else
-                set(fig_handle_vec(i), 'PaperPositionMode', 'auto');
+                set(fig_handle_vec(i),'PaperPositionMode','auto');
             end
         end
         if ~isempty(dimScale)
             pos=get(fig_handle_vec(i),'PaperPosition');
-            set(fig_handle_vec(i), 'PaperPositionMode', 'manual');
+            set(fig_handle_vec(i),'PaperPositionMode','manual');
             set(fig_handle_vec(i),'PaperPosition',[pos(1:2),pos(3:4).*dimScale/max(dimScale)]);
         end
     end
@@ -102,9 +102,9 @@ for i=1:length(fig_handle_vec)
             renderer='-opengl';
         end
         if nargin<3
-           print(['-r',int2str(resolution)], renderer, ['-d',printFlag_cVec{n}],['-f',int2str(double(fig_handle_vec(i)))]);
+           print(['-r',int2str(resolution)],renderer,['-d',printFlag_cVec{n}],['-f',int2str(double(fig_handle_vec(i)))]);
         else
-           print(['-r',int2str(resolution)], renderer, ['-d',printFlag_cVec{n}],['-f',int2str(double(fig_handle_vec(i)))],[filenames{i},'.',pictureFormat_cVec{n}]);
+           print(['-r',int2str(resolution)],renderer,['-d',printFlag_cVec{n}],['-f',int2str(double(fig_handle_vec(i)))],[filenames{i},'.',pictureFormat_cVec{n}]);
         end
     end
 end
@@ -112,7 +112,7 @@ end
 %If "strawberry perl" and Miketex is installed
 if nargin>=3
     temp_env=getenv('LD_LIBRARY_PATH');
-    setenv('LD_LIBRARY_PATH', '')
+    setenv('LD_LIBRARY_PATH','')
     
     if any(strcmpi(pictureFormat_cVec,'pdf'))
         [status,~]=system('where pdfcrop');
@@ -140,5 +140,5 @@ if nargin>=3
             end
         end
     end
-    setenv('LD_LIBRARY_PATH', temp_env)
+    setenv('LD_LIBRARY_PATH',temp_env)
 end

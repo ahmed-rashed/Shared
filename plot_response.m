@@ -1,4 +1,4 @@
-function [ax,h1]=plot_response(t_vec,x_func,zeta_vec, ...
+function [ax,h1]=plot_response(t_vec,x_func,zeta_vec,...
                                         t_label,x_label,zeta_subtitle,t_multiplier,ax,legend_location,varargin)   %Optional arguments
 
 if nargin<4
@@ -71,9 +71,9 @@ for ii=1:N_zeta
     end
 end
 if ~holdState,hold off,end
-xlabel(t_label, 'interpreter', 'latex');
+xlabel(t_label,'interpreter','latex');
 if ~isempty(x_label)
-    ylabel(x_label, 'interpreter', 'latex')
+    ylabel(x_label,'interpreter','latex')
 end
 if N_zeta>1,legend(legend_str,'interpreter','latex','Location',legend_location);end
 

@@ -1,8 +1,8 @@
 function [ax_mag_h,ax_phase_h,curve_mag_h,curve_phase_h]= ...
-         plot_FRF_mag_phase(f_vec,H_vec, ...
-                            islin,ax_mag_h,ax_phase_h,f_label,H_label,DispMagLines,maxPhaseLag, ... %Optional arguments
+         plot_FRF_mag_phase(f_vec,H_vec,...
+                            islin,ax_mag_h,ax_phase_h,f_label,H_label,DispMagLines,maxPhaseLag,... %Optional arguments
                             varargin)
-%To create a nonvalid graphics object (axis handle), use eigther:
+%To create a nonvalid graphics object (axis handle),use eigther:
 %1) h=gobjects
 %2) h=matlab.graphics.GraphicsPlaceholder
 
@@ -50,7 +50,7 @@ else
         H_Latex_subtitle='H';
     elseif iscellstr(H_label)
         if length(H_label)~=2
-            error('If H_label is cell string, it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
+            error('If H_label is cell string,it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
         end
         H_Latex_subtitle=H_label{1};
         H_real_multiplier=H_label{2};
@@ -109,7 +109,7 @@ end
 if isgraphics(ax_phase_h)
 	set(ax_mag_h,'XTickLabel',[]);
 else
-	xlabel(ax_mag_h,f_label, 'interpreter', 'latex')
+	xlabel(ax_mag_h,f_label,'interpreter','latex')
 end
 
 % if iscell(H_Latex_subtitle)
@@ -117,9 +117,9 @@ end
 %     for ii=1:length(H_Latex_subtitle)
 %         legStr{ii}=['$\left|',H_Latex_subtitle{ii},'\right|$'];
 %     end
-%     legend(ax_mag_h,legStr, 'interpreter', 'latex')
+%     legend(ax_mag_h,legStr,'interpreter','latex')
 % else
-    ylabel(ax_mag_h,['$\left|',H_Latex_subtitle,'\right|',H_real_multiplier,'$'], 'interpreter', 'latex')
+    ylabel(ax_mag_h,['$\left|',H_Latex_subtitle,'\right|',H_real_multiplier,'$'],'interpreter','latex')
 % end
 set(ax_mag_h,'xGrid','on','YGrid','on');
 
@@ -148,14 +148,14 @@ if isgraphics(ax_phase_h)
         end
     end
 
-    xlabel(ax_phase_h,f_label, 'interpreter', 'latex')
+    xlabel(ax_phase_h,f_label,'interpreter','latex')
 %     if iscell(H_Latex_subtitle)
 %         for ii=1:length(H_Latex_subtitle)
 %             legStr{ii}=['$\angle ',H_Latex_subtitle{ii},'$'];
 %         end
-%         legend(ax_phase_h,legStr, 'interpreter', 'latex')
+%         legend(ax_phase_h,legStr,'interpreter','latex')
 %     else
-        ylabel(ax_phase_h,['$\angle \left(',H_Latex_subtitle,'\right)$ (rad)'], 'interpreter', 'latex')
+        ylabel(ax_phase_h,['$\angle \left(',H_Latex_subtitle,'\right)$ (rad)'],'interpreter','latex')
 %     end
 
     yStep=pi;
