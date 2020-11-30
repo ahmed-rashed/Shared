@@ -125,8 +125,12 @@ set(ax_mag_h,'xGrid','on','YGrid','on');
 
 %Plot the phase
 if isgraphics(ax_phase_h)
-    H_angle_vec=correctedPhase(H_vec,maxPhaseLag);
-    curve_phase_h=plot(ax_phase_h,f_vec,H_angle_vec,varargin{:});
+    if isnan(maxPhaseLag)
+        H_angle_vec_Corrected=angle(H_vec);
+    else
+        H_angle_vec_Corrected=correctedPhase(H_vec,maxPhaseLag);
+    end
+    curve_phase_h=plot(ax_phase_h,f_vec,H_angle_vec_Corrected,varargin{:});
     if nargin>7
         if DispMagLines
             set(gcf,'NextPlot','add');
@@ -134,9 +138,9 @@ if isgraphics(ax_phase_h)
             setappdata(gca,'PlotHoldStyle',false);
 
             if n_f==size(H_vec,1)
-                H_angle_vec_temp=H_angle_vec(iidx,:);
+                H_angle_vec_temp=H_angle_vec_Corrected(iidx,:);
             else     %Assuming that n_f==size(H_vec,2)
-                H_angle_vec_temp=H_angle_vec(:,iidx);
+                H_angle_vec_temp=H_angle_vec_Corrected(:,iidx);
             end
 
             handle2=plot(ax_phase_h,f_vec(iidx),H_angle_vec_temp,'.','MarkerSize',15,'MarkerEdgeColor',get(handle,'Color'));
@@ -159,11 +163,11 @@ if isgraphics(ax_phase_h)
     %set(ax_phase_h,'YTick',yStep*[floor(yTicks(1)/yStep):ceil(yTicks(end)/yStep)]);
     if strcmp(get(ax_phase_h,'YLimMode'),'manual')
         ylimits=get(ax_phase_h,'ylim');
-        yLim_min=min(yStep*floor(min(min(H_angle_vec))/yStep),ylimits(1));
-        yLim_max=max(yStep*ceil(max(max(H_angle_vec))/yStep),ylimits(2));
+        yLim_min=min(yStep*floor(min(min(H_angle_vec_Corrected))/yStep),ylimits(1));
+        yLim_max=max(yStep*ceil(max(max(H_angle_vec_Corrected))/yStep),ylimits(2));
     else
-        yLim_min=yStep*floor(min(min(H_angle_vec))/yStep);
-        yLim_max=yStep*ceil(max(max(H_angle_vec))/yStep);
+        yLim_min=yStep*floor(min(min(H_angle_vec_Corrected))/yStep);
+        yLim_max=yStep*ceil(max(max(H_angle_vec_Corrected))/yStep);
     end
     N_ticks=round((yLim_max-yLim_min)/yStep)+1;
     if N_ticks>6

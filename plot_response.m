@@ -1,5 +1,5 @@
 function [ax,h1]=plot_response(t_vec,x_func,zeta_vec, ...
-                                        t_label,x_label,zeta_subtitle,t_multiplier,ax,legend_location)   %Optional arguments
+                                        t_label,x_label,zeta_subtitle,t_multiplier,ax,legend_location,varargin)   %Optional arguments
 
 if nargin<4
     t_label='$t$ (sec.)';
@@ -58,7 +58,7 @@ if ~holdState,hold on,end
 if N_zeta>1,legend_str=cell(N_zeta,1);end
 for ii=1:N_zeta
     x_vec=x_func(t_vec,zeta_vec(ii));
-    h1=plot(t_vec*t_multiplier,x_vec);
+    h1=plot(t_vec*t_multiplier,x_vec,varargin{:});
     
     if N_zeta>1
         if zeta_vec(ii)==1/sqrt(2)
