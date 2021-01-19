@@ -1,8 +1,8 @@
 function [ax_mag_h,ax_phase_h,curve_mag_h,curve_phase_h]= ...
-         plot_FRF_mag_phase(f_vec,H_vec,...
-                            islin,ax_mag_h,ax_phase_h,f_label,H_label,DispMagLines,maxPhaseLag,... %Optional arguments
+         plot_FRF_mag_phase(f_vec,H_vec, ...
+                            islin,ax_mag_h,ax_phase_h,f_label,H_label,DispMagLines,maxPhaseLag, ... %Optional arguments
                             varargin)
-%To create a nonvalid graphics object (axis handle),use eigther:
+%To create a nonvalid graphics object (axis handle), use eigther:
 %1) h=gobjects
 %2) h=matlab.graphics.GraphicsPlaceholder
 
@@ -39,8 +39,8 @@ else
 end
 indices=strfind(f_label,'$');
 if length(indices)<2,error('f_label does not include LaTeX inline equation !!'),end
-index_temp=strfind(f_label,'\equiv');
-if ~isempty(index_temp),indices(2)=index_temp;end
+index_temp=strfind(f_label,'\equiv');if ~isempty(index_temp),indices(2)=index_temp;end
+index_temp=strfind(f_label,'/');if ~isempty(index_temp),indices(2)=index_temp;end
 
 H_real_multiplier='';
 if nargin<7
@@ -50,7 +50,7 @@ else
         H_Latex_subtitle='H';
     elseif iscellstr(H_label)
         if length(H_label)~=2
-            error('If H_label is cell string,it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
+            error('If H_label is cell string, it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
         end
         H_Latex_subtitle=H_label{1};
         H_real_multiplier=H_label{2};
@@ -63,7 +63,7 @@ H_Latex_subtitle=[H_Latex_subtitle,'\left(',f_label(indices(1)+1:indices(2)-1),'
 curve_mag_h=plot(ax_mag_h,f_vec,abs(H_vec),varargin{:});
 n_f=length(f_vec);
         
-if nargin>7
+if nargin>8
     if DispMagLines
         n_MagLines=DispMagLines;
         delta_temp=floor(n_f/n_MagLines);

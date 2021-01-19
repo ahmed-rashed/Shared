@@ -28,7 +28,7 @@ else
         H_Latex_subtitle='H';
     elseif iscellstr(H_label)
         if length(H_label)~=2
-            error('If H_label is cell string,it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
+            error('If H_label is cell string, it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
         end
         H_Latex_subtitle=H_label{1};
         H_real_multiplier=H_label{2};

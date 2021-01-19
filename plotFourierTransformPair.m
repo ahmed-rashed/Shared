@@ -3,7 +3,7 @@ function plotFourierTransformPair(t_col,x_cols,f_col,x_xlabel_Latex,x_Title_Late
 N_Curves=size(x_cols,2);
 
 if (~isempty(horizontalLinesTextLatex) && size(horizontalLinesTextLatex,2)~=1) || (~isempty(verticalLinesTextLatex) && size(verticalLinesTextLatex,2)~=1) || (~isempty(HorizontalLinesTextLatex) && size(HorizontalLinesTextLatex,2)~=1) || (~isempty(VerticalLinesTextLatex) && size(VerticalLinesTextLatex,2)~=1)
-    error('horizontalLinesTextLatex,verticalLinesTextLatex,HorizontalLinesTextLatex and VerticalLinesTextLatex must be column vectors');
+    error('horizontalLinesTextLatex, verticalLinesTextLatex, HorizontalLinesTextLatex and VerticalLinesTextLatex must be column vectors');
 end
 
 if ~(isempty(y_HorizontalLines) || size(y_HorizontalLines,2)==1 || size(y_HorizontalLines,2)==N_Curves)
