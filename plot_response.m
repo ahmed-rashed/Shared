@@ -55,18 +55,18 @@ N_zeta=length(zeta_vec);
 axes(ax);
 holdState=ishold;
 if ~holdState,hold on,end
-if N_zeta>1,legend_str=cell(N_zeta,1);end
+if N_zeta>1,legend_str=strings(N_zeta,1);end
 for ii=1:N_zeta
     x_vec=x_func(t_vec,zeta_vec(ii));
     h1=plot(t_vec*t_multiplier,x_vec,varargin{:});
     
     if N_zeta>1
         if zeta_vec(ii)==1/sqrt(2)
-            legend_str(ii)=cellstr(['$',zeta_subtitle,'=1/\sqrt{2}$']);
+            legend_str(ii)="$"+zeta_subtitle+'=1/\sqrt{2}$';
         elseif zeta_vec(ii)==sqrt(2)
-            legend_str(ii)=cellstr(['$',zeta_subtitle,'=\sqrt{2}$']);
+            legend_str(ii)="$"+zeta_subtitle+'=\sqrt{2}$';
         else
-            legend_str(ii)=cellstr(['$',zeta_subtitle,'=',num2str(zeta_vec(ii)),'$']);
+            legend_str(ii)="$"+zeta_subtitle+'='+zeta_vec(ii)+'$';
         end
     end
 end

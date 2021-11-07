@@ -12,7 +12,7 @@ classdef cBK_Windows
 %                [402,498,99,1,0]/402     %Mathematica
                1,1.933,1.286,.388,.032];
         
-        win_name_vec={'rectangular','Hann','Kaiser-Bessel','flat-top'};
+        win_name_vec=["rectangular","Hann","Kaiser-Bessel","flat-top"];
     end
 
     methods
@@ -28,7 +28,7 @@ classdef cBK_Windows
         end
                 
         function win_name=win_name(oThisClass)
-            win_name=oThisClass.win_name_vec{oThisClass.i_win};
+            win_name=oThisClass.win_name_vec(oThisClass.i_win);
         end
         
         function w_col=w(oThisClass,K_plus_1)

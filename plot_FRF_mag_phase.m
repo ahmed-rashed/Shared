@@ -42,23 +42,22 @@ if length(indices)<2,error('f_label does not include LaTeX inline equation !!'),
 index_temp=strfind(f_label,'\equiv');if ~isempty(index_temp),indices(2)=index_temp;end
 index_temp=strfind(f_label,'/');if ~isempty(index_temp),indices(2)=index_temp;end
 
-H_real_multiplier='';
+H_real_multiplier="";
 if nargin<7
-    H_Latex_subtitle='H';
+    H_Latex_subtitle="H";
 else
     if isempty(H_label)
-        H_Latex_subtitle='H';
-    elseif iscellstr(H_label)
-        if length(H_label)~=2
-            error('If H_label is cell string, it must have two elements; one for H_Latex_subtitle and the other for H_real_multiplier')
-        end
-        H_Latex_subtitle=H_label{1};
-        H_real_multiplier=H_label{2};
+        H_Latex_subtitle="H";
+    elseif  isStringScalar(H_label) || ischar(H_label)
+        H_Latex_subtitle=string(H_label);
+    elseif isstring(H_label) && length(H_label)==2
+        H_Latex_subtitle=H_label(1);
+        H_real_multiplier=H_label(2);
     else
-        H_Latex_subtitle=H_label;
+        error('H_label can be either a character array, a string scalar or two-element-string; one for H_Latex_subtitle and the other for H_real_multiplier')
     end
 end
-H_Latex_subtitle=[H_Latex_subtitle,'\left(',f_label(indices(1)+1:indices(2)-1),'\right)'];
+H_Latex_subtitle=H_Latex_subtitle+'\left('+f_label(indices(1)+1:indices(2)-1)+'\right)';
 
 curve_mag_h=plot(ax_mag_h,f_vec,abs(H_vec),varargin{:});
 n_f=length(f_vec);
@@ -119,7 +118,7 @@ end
 %     end
 %     legend(ax_mag_h,legStr,'interpreter','latex')
 % else
-    ylabel(ax_mag_h,['$\left|',H_Latex_subtitle,'\right|',H_real_multiplier,'$'],'interpreter','latex')
+    ylabel(ax_mag_h,'$\left|'+H_Latex_subtitle+'\right|'+H_real_multiplier+'$','interpreter','latex')
 % end
 set(ax_mag_h,'xGrid','on','YGrid','on');
 
@@ -155,7 +154,7 @@ if isgraphics(ax_phase_h)
 %         end
 %         legend(ax_phase_h,legStr,'interpreter','latex')
 %     else
-        ylabel(ax_phase_h,['$\angle \left(',H_Latex_subtitle,'\right)$ (rad)'],'interpreter','latex')
+        ylabel(ax_phase_h,'$\angle \left('+H_Latex_subtitle+'\right)$ (rad)','interpreter','latex')
 %     end
 
     yStep=pi;
@@ -176,16 +175,16 @@ if isgraphics(ax_phase_h)
     yTicks=fliplr(yLim_max:-yStep:yLim_min);
     N_ticks=length(yTicks);
     set(ax_phase_h,'YTick',yTicks);
-    yTickLabels=cell(1,N_ticks);
+    yTickLabels=strings(1,N_ticks);
     for ii=1:N_ticks
         if yTicks(ii)==0
-            yTickLabels{ii}='$0$';
+            yTickLabels(ii)="$0$";
         elseif yTicks(ii)==pi
-            yTickLabels{ii}='$\pi$';
+            yTickLabels(ii)="$\pi$";
         elseif yTicks(ii)==-pi
-            yTickLabels{ii}='$-\pi$';
+            yTickLabels(ii)="$-\pi$";
         else
-            yTickLabels{ii}=['$',num2str(yTicks(ii)/pi),'\pi$'];
+            yTickLabels(ii)="$"+(yTicks(ii)/pi)+'\pi$';
         end
     end
     ax_phase_h.YAxis.TickLabelInterpreter='latex';

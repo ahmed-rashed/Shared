@@ -38,17 +38,17 @@ for ii=1:N_Curves
     subplot(N_Curves,2,(ii-1)*2+1)
     plot(t_col,x_cols(1:length(t_col),ii))
     xlabel(x_xlabel_Latex,'interpreter','latex')
-    title(x_Title_Latex{ii},'interpreter','latex')
+    title(x_Title_Latex(ii),'interpreter','latex')
     %xlim([0,1])
     x_lims=xlim;
     hold on;
     for nn=1:size(y_HorizontalLines,1)
         if size(y_HorizontalLines,2) ==1
             plot(xlim,y_HorizontalLines(nn,1)*[1,1],'--k');
-            text(x_lims(1)+.05*(x_lims(2)-x_lims(1)),1.05*y_HorizontalLines(nn,1),horizontalLinesTextLatex{nn,1},'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+            text(x_lims(1)+.05*(x_lims(2)-x_lims(1)),1.05*y_HorizontalLines(nn,1),horizontalLinesTextLatex(nn,1),'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
         else
             plot(xlim,y_HorizontalLines(nn,ii)*[1,1],'--k');
-            text(x_lims(1)+.05*(x_lims(2)-x_lims(1)),1.05*y_HorizontalLines(nn,ii),horizontalLinesTextLatex{nn,1},'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+            text(x_lims(1)+.05*(x_lims(2)-x_lims(1)),1.05*y_HorizontalLines(nn,ii),horizontalLinesTextLatex(nn,1),'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
         end
     end
     hold off
@@ -56,17 +56,17 @@ for ii=1:N_Curves
     subplot(N_Curves,2,(ii-1)*2+2)
     plot(f_col,abs(X_cols(1:length(f_col),ii)));
     xlabel(X_xlabel_Latex,'interpreter','latex')
-    title(X_Title_Latex{ii},'interpreter','latex')
+    title(X_Title_Latex(ii),'interpreter','latex')
     %xlim([0,0.5])
     x_lims=xlim;
     hold on;
     for nn=1:size(Y_HorizontalLines,1)
         if size(Y_HorizontalLines,2) ==1
             plot(xlim,Y_HorizontalLines(nn,1)*[1,1],'--k');
-            text(x_lims(1)+.3*(x_lims(2)-x_lims(1)),1.05*Y_HorizontalLines(nn,1),HorizontalLinesTextLatex{nn,1},'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+            text(x_lims(1)+.3*(x_lims(2)-x_lims(1)),1.05*Y_HorizontalLines(nn,1),HorizontalLinesTextLatex(nn,1),'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
         else
             plot(xlim,Y_HorizontalLines(nn,ii)*[1,1],'--k');
-            text(x_lims(1)+.3*(x_lims(2)-x_lims(1)),1.05*Y_HorizontalLines(nn,ii),HorizontalLinesTextLatex{nn,1},'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+            text(x_lims(1)+.3*(x_lims(2)-x_lims(1)),1.05*Y_HorizontalLines(nn,ii),HorizontalLinesTextLatex(nn,1),'VerticalAlignment','bottom','interpreter','latex','FontSize',8)
         end
     end
     hold off
@@ -113,10 +113,10 @@ for ii=1:N_Curves
         for nn=1:size(x_VeticalLines,1)
             if size(x_VeticalLines,2) ==1
                 plot(x_VeticalLines(nn,1)*[1,1],[yLimitsMin,yLimitsMax],'--k');
-                text(x_VeticalLines(nn,1),yLimitsMin+.05*(yLimitsMax-yLimitsMin),verticalLinesTextLatex{nn,1},'Rotation',90,'HorizontalAlignment','left','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+                text(x_VeticalLines(nn,1),yLimitsMin+.05*(yLimitsMax-yLimitsMin),verticalLinesTextLatex(nn,1),'Rotation',90,'HorizontalAlignment','left','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
             else
                 plot(x_VeticalLines(nn,1)*[1,1],[yLimitsMin,yLimitsMax],'--k');
-                text(x_VeticalLines(nn,ii),yLimitsMin+.05*(yLimitsMax-yLimitsMin),verticalLinesTextLatex{nn,1},'Rotation',90,'HorizontalAlignment','left','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+                text(x_VeticalLines(nn,ii),yLimitsMin+.05*(yLimitsMax-yLimitsMin),verticalLinesTextLatex(nn,1),'Rotation',90,'HorizontalAlignment','left','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
             end
         end
         hold off
@@ -129,10 +129,10 @@ for ii=1:N_Curves
         for nn=1:size(X_VeticalLines,1)
             if size(X_VeticalLines,2) ==1
                 plot(X_VeticalLines(nn,1)*[1,1],[YLimitsMin,YLimitsMax],'--k');
-                text(X_VeticalLines(nn,1),YLimitsMax-.05*(YLimitsMax-YLimitsMin),VerticalLinesTextLatex{nn,1},'Rotation',90,'HorizontalAlignment','right','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+                text(X_VeticalLines(nn,1),YLimitsMax-.05*(YLimitsMax-YLimitsMin),VerticalLinesTextLatex(nn,1),'Rotation',90,'HorizontalAlignment','right','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
             else
                 plot(X_VeticalLines(nn,ii)*[1,1],[YLimitsMin,YLimitsMax],'--k');
-                text(X_VeticalLines(nn,ii),YLimitsMax-.05*(YLimitsMax-YLimitsMin),VerticalLinesTextLatex{nn,1},'Rotation',90,'HorizontalAlignment','right','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
+                text(X_VeticalLines(nn,ii),YLimitsMax-.05*(YLimitsMax-YLimitsMin),VerticalLinesTextLatex(nn,1),'Rotation',90,'HorizontalAlignment','right','VerticalAlignment','bottom','interpreter','latex','FontSize',8)
             end
         end
         hold off
