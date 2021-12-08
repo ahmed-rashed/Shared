@@ -1,5 +1,4 @@
-function [Delta_t,f_s,Delta_f]=samplingParameters_T_N(T,N)
+function [D_t,f_s,D_f,N_no_fold]=samplingParameters_T_N(T,N)
 
-Delta_f=1/T;
-Delta_t=T/N;
-f_s=N*Delta_f;
+D_t=T/N;
+[~,f_s,D_f,N_no_fold]=samplingParameters_D_t_N(D_t,N);
