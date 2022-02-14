@@ -98,7 +98,7 @@ for i=1:length(fig_handle_vec)
     for n=1:length(printFlag_vec)
         if any(printFlag_vec(n)==["meta","pdf","eps","epsc","svg"])
             renderer='-painters';
-        elseif any(printFlag_vec(n),["png","jpg"])
+        elseif any(printFlag_vec(n)==["png","jpg"])
             renderer='-opengl';
         end
 		args={"-r"+resolution,renderer,"-d"+printFlag_vec(n),"-f"+double(fig_handle_vec(i))};
