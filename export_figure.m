@@ -17,7 +17,7 @@ elseif isempty(pictureFormat_vec)
     pictureFormat_vec="pdf";
 else
     if ~isstring(pictureFormat_vec)
-        error('pictureFormat must be array of strings.')
+        error('pictureFormat_vec must be array of strings.')
     end
 end
 
@@ -130,11 +130,11 @@ if nargin>=3
     end
 
     for n=1:length(pictureFormat_vec)
-        if strcmpi(pictureFormat_vec{n},'pdf')
+        if strcmpi(pictureFormat_vec(n),'pdf')
             for i=1:length(fig_handle_vec)
                system(['pdfcrop "',filenames{i},'.pdf" "',filenames{i},'.pdf"']);
             end
-        elseif any(strcmpi(pictureFormat_vec{n},{'png','jpg'}))
+        elseif any(strcmpi(pictureFormat_vec(n),["png","jpg"]))
             for i=1:length(fig_handle_vec)
                 system("magick convert """+filenames(i)+'.'+pictureFormat_vec(n)+""" -trim """+filenames(i)+'.'+pictureFormat_vec(n)+'"');
             end
