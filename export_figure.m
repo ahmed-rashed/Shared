@@ -60,36 +60,36 @@ if ~isempty(Expand)
     end
 end
 
-for i=1:length(fig_handle_vec)
-    f_OriginalUnit=get(fig_handle_vec(i),'Units');
-    set(fig_handle_vec(i),'papertype','A4');
+for fig_handle=fig_handle_vec
+    f_OriginalUnit=get(fig_handle,'Units');
+    set(fig_handle,'papertype','A4');
     if ~isempty(Expand)
         if ischar(Expand)
             if strcmpi(Expand(1:2),'||')
-                 set(fig_handle_vec(i),'PaperOrientation','portrait');
+                 set(fig_handle,'PaperOrientation','portrait');
             elseif strcmpi(Expand(1:2),'==')
-               set(fig_handle_vec(i),'PaperOrientation','landscape');
+               set(fig_handle,'PaperOrientation','landscape');
             end
         end
         
         if ischar(Expand)
             if strcmpi(Expand,'||') || strcmpi(Expand,'==')
-                a=get(fig_handle_vec(i),'papersize');
-                set(fig_handle_vec(i),'PaperPositionMode','manual');
-                set(fig_handle_vec(i),'PaperPosition',[0 0 a(1) a(2)]);
-                set(fig_handle_vec(i),'Units',get(fig_handle_vec(i),'PaperUnits'));
-                set(fig_handle_vec(i),'Position',[0 0 a(1) a(2)]);
-                set(fig_handle_vec(i),'Units',f_OriginalUnit);
-                set(0,'CurrentFigure',fig_handle_vec(i)),
+                a=get(fig_handle,'papersize');
+                set(fig_handle,'PaperPositionMode','manual');
+                set(fig_handle,'PaperPosition',[0 0 a(1) a(2)]);
+                set(fig_handle,'Units',get(fig_handle,'PaperUnits'));
+                set(fig_handle,'Position',[0 0 a(1) a(2)]);
+                set(fig_handle,'Units',f_OriginalUnit);
+                set(0,'CurrentFigure',fig_handle),
                 drawnow
             else
-                set(fig_handle_vec(i),'PaperPositionMode','auto');
+                set(fig_handle,'PaperPositionMode','auto');
             end
         end
         if ~isempty(dimScale)
-            pos=get(fig_handle_vec(i),'PaperPosition');
-            set(fig_handle_vec(i),'PaperPositionMode','manual');
-            set(fig_handle_vec(i),'PaperPosition',[pos(1:2),pos(3:4).*dimScale/max(dimScale)]);
+            pos=get(fig_handle,'PaperPosition');
+            set(fig_handle,'PaperPositionMode','manual');
+            set(fig_handle,'PaperPosition',[pos(1:2),pos(3:4).*dimScale/max(dimScale)]);
         end
     end
 end
