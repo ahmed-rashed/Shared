@@ -2,8 +2,9 @@ function [ax_r,ax_i,h1,h2]=plot_FRF_r_i(f_vec,H_vec,...
                                         ax_r,ax_i,f_label,H_label)   %Optional arguments
 
 if nargin<3
-    ax_r=subplot(2,1,1);
-    ax_i=subplot(2,1,2);
+    tiledlayout(2,1,"TileSpacing","compact")
+    ax_r=nexttile;axis("padded")
+    ax_i=nexttile;axis("padded")
 end
 
 if nargin<5
@@ -46,3 +47,5 @@ h2=plot(ax_i,f_vec,imag(H_vec));
 xlabel(ax_i,f_label,'interpreter','latex');
 ylabel(ax_i,'$\Im\left('+H_Latex_subtitle+'\right)'+H_real_multiplier+'$','interpreter','latex')
 set(ax_i,'xGrid','on','YGrid','on');
+
+linkaxes([ax_r,ax_i],'x')

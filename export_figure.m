@@ -1,5 +1,5 @@
 function export_figure(fig_handle_vec, ...
-                    Expand,filenames,resolution,pictureFormat_vec,dimScale)   %Optional arguments
+                    Expand,filenames,resolution,pictureFormat_vec,dimScale_row)   %Optional arguments
 
 if nargin<2
     Expand='';
@@ -22,7 +22,7 @@ else
 end
 
 if nargin<6
-    dimScale=[];
+    dimScale_row=[];
 end
 
 printFlag_vec=strings(size(pictureFormat_vec));
@@ -60,7 +60,7 @@ if ~isempty(Expand)
     end
 end
 
-for fig_handle=fig_handle_vec
+for fig_handle=fig_handle_vec(:).'
     f_OriginalUnit=get(fig_handle,'Units');
     set(fig_handle,'papertype','A4');
     if ~isempty(Expand)
@@ -86,10 +86,10 @@ for fig_handle=fig_handle_vec
                 set(fig_handle,'PaperPositionMode','auto');
             end
         end
-        if ~isempty(dimScale)
+        if ~isempty(dimScale_row)
             pos=get(fig_handle,'PaperPosition');
             set(fig_handle,'PaperPositionMode','manual');
-            set(fig_handle,'PaperPosition',[pos(1:2),pos(3:4).*dimScale/max(dimScale)]);
+            set(fig_handle,'PaperPosition',[pos(1:2),pos(3:4).*dimScale_row/max(dimScale_row)]);
         end
     end
 end
