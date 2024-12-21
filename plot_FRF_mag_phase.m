@@ -70,7 +70,7 @@ if nargin>8
         delta_temp=floor(n_f/n_MagLines);
         iidx=1:delta_temp:n_f;
 
-        hold on
+        hold(ax_mag_h,"on")
 
         if n_f==size(H_vec,1)
             H_temp=H_vec(iidx,:);
@@ -130,9 +130,9 @@ if isgraphics(ax_phase_h)
         H_angle_vec_Corrected=correctedPhase(H_vec,maxPhaseLag);
     end
     curve_phase_h=plot(ax_phase_h,f_vec,H_angle_vec_Corrected,varargin{:});
-    if nargin>7
+    if nargin>8
         if DispMagLines
-            hold on
+            hold(ax_phase_h,"on")
 
             if n_f==size(H_vec,1)
                 H_angle_vec_temp=H_angle_vec_Corrected(iidx,:);
@@ -155,7 +155,7 @@ if isgraphics(ax_phase_h)
         ylabel(ax_phase_h,'$\angle \left('+H_Latex_subtitle+'\right)$ (rad)','interpreter','latex')
 %     end
 
-    yStep=pi;
+    yStep=pi/2;
     %yTicks=get(ax_phase_h,'YTick');
     %set(ax_phase_h,'YTick',yStep*[floor(yTicks(1)/yStep):ceil(yTicks(end)/yStep)]);
     if strcmp(get(ax_phase_h,'YLimMode'),'manual')
@@ -191,6 +191,19 @@ if isgraphics(ax_phase_h)
         ylim(ax_phase_h,[yLim_min,yLim_max])
     end
     set(ax_phase_h,'xGrid','on','YGrid','on');
-    set(ax_phase_h,'YMinorTick','on');
-    linkaxes([ax_mag_h,ax_phase_h],'x')
+    % set(ax_phase_h,'YMinorTick','on');
+    if isgraphics(ax_mag_h)
+        % This is a workaround to a weired Matlab behavior
+        yLimMode_mag=ylim(ax_mag_h,"mode");
+        ylims_mag=ylim(ax_mag_h);
+        yLimMode_phase=ylim(ax_phase_h,"mode");
+        ylims_phase=ylim(ax_phase_h);
+        linkaxes([ax_mag_h,ax_phase_h],'x')
+        if strcmp(yLimMode_mag,'manual')
+            ylim(ax_mag_h,ylims_mag);
+        end
+        if strcmp(yLimMode_phase,'manual')
+            ylim(ax_phase_h,ylims_phase);
+        end
+    end
 end

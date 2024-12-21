@@ -1,7 +1,7 @@
 function [ax_r,ax_i,h1,h2]=plot_FRF_r_i(f_vec,H_vec,...
                                         ax_r,ax_i,f_label,H_label)   %Optional arguments
 
-if nargin<3
+if nargin<3 || isempty(ax_r)
     tiledlayout(2,1,"TileSpacing","compact")
     ax_r=nexttile;axis("padded")
     ax_i=nexttile;axis("padded")
