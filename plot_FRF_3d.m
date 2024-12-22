@@ -49,6 +49,11 @@ zlabel('$\Im\left('+H_Latex_subtitle+'\right)'+H_real_multiplier+'$','interprete
 if nargin>4
     ax=gca;
     holdState=ishold;
+    if ~holdState
+        ylim(ax,"padded")
+        zlim(ax,"padded")
+        drawnow
+    end
     colorOrderIndex=ax.ColorOrderIndex;
     lineStyleOrderIndex=ax.LineStyleOrderIndex;
 

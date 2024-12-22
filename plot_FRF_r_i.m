@@ -3,8 +3,8 @@ function [ax_r,ax_i,h1,h2]=plot_FRF_r_i(f_vec,H_vec,...
 
 if nargin<3 || isempty(ax_r)
     tiledlayout(2,1,"TileSpacing","compact")
-    ax_r=nexttile;axis("padded")
-    ax_i=nexttile;axis("padded")
+    ax_r=nexttile;
+    ax_i=nexttile;
 end
 
 if nargin<5
@@ -49,3 +49,10 @@ ylabel(ax_i,'$\Im\left('+H_Latex_subtitle+'\right)'+H_real_multiplier+'$','inter
 set(ax_i,'xGrid','on','YGrid','on');
 
 linkaxes([ax_r,ax_i],'x')
+
+if ~ishold(ax_r)
+    ylim(ax_r,"padded")
+end
+if ~ishold(ax_i)
+    ylim(ax_i,"padded")
+end

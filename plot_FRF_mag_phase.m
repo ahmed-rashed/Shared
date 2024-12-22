@@ -63,7 +63,7 @@ H_Latex_subtitle=H_Latex_subtitle+'\left('+f_label(indices(1)+1:indices(2)-1)+'\
 
 curve_mag_h=plot(ax_mag_h,f_vec,abs(H_vec),varargin{:});
 n_f=length(f_vec);
-        
+
 if nargin>8
     if DispMagLines
         n_MagLines=DispMagLines;
@@ -124,6 +124,8 @@ set(ax_mag_h,'xGrid','on','YGrid','on');
 
 %Plot the phase
 if isgraphics(ax_phase_h)
+    holdState_phase=ishold(ax_phase_h);
+
     if isnan(maxPhaseLag)
         H_angle_vec_Corrected=angle(H_vec);
     else
@@ -193,7 +195,7 @@ if isgraphics(ax_phase_h)
     set(ax_phase_h,'xGrid','on','YGrid','on');
     % set(ax_phase_h,'YMinorTick','on');
     if isgraphics(ax_mag_h)
-        % This is a workaround to a weired Matlab behavior
+        % This is a workaround to a weird Matlab behavior
         yLimMode_mag=ylim(ax_mag_h,"mode");
         ylims_mag=ylim(ax_mag_h);
         yLimMode_phase=ylim(ax_phase_h,"mode");
@@ -205,5 +207,10 @@ if isgraphics(ax_phase_h)
         if strcmp(yLimMode_phase,'manual')
             ylim(ax_phase_h,ylims_phase);
         end
+    end
+
+    hold(ax_phase_h,holdState_phase);
+    if ~holdState_phase
+        ylim(ax_phase_h,"padded")
     end
 end
